@@ -12,3 +12,14 @@ config.i2ll_psk
 config.i2ll_devices
 """
 
+from pydantic import BaseSettings, Extra
+
+
+class Config(BaseSettings, extra=Extra.ignore):
+
+    i2ll_host: str = "127.0.0.1"
+    i2ll_port: int = 8421
+    i2ll_psk: str = "i2tcppsk"
+    i2ll_clt_buffer: int = 20
+    i2ll_timeout: int = 15
+    i2ll_devices: dict
