@@ -12,7 +12,15 @@ config.i2ll_psk
 config.i2ll_devices
 """
 
-from pydantic import BaseSettings, Extra
+from pydantic import BaseSettings, BaseModel, Extra
+from typing import List
+
+
+class Devices(BaseModel, extra=Extra.ignore):
+
+    alias: List[str] = []
+    root_topic: str
+    permitted_group: List[int]
 
 
 class Config(BaseSettings, extra=Extra.ignore):
@@ -22,4 +30,4 @@ class Config(BaseSettings, extra=Extra.ignore):
     i2ll_psk: str = "i2tcppsk"
     i2ll_clt_buffer: int = 20
     i2ll_timeout: int = 15
-    i2ll_devices: dict
+    i2ll_devices: List[Devices] = []

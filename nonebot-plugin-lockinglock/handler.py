@@ -19,8 +19,8 @@ msging = on_message()
 @msging.handle()
 async def unlock_by_group_member(bot: Bot, event: GroupMessage):
     group_id = event.get_user_id()
-    for dev in LL_CONFIG.i2ll_devices.keys():
-        if dev[]
+    for dev in LL_CONFIG.i2ll_devices:
+        pass
 
     await msging.send(MessageSegment.plain("xxx"))
 

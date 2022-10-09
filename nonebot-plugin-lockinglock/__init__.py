@@ -12,4 +12,9 @@ from .config import Config
 GLOBAL_CONFIG = get_driver().config
 LL_CONFIG = Config.parse_obj(GLOBAL_CONFIG)
 
+# validate config
+device_dict = LL_CONFIG.i2ll_devices
+for dev in device_dict.keys():
+    assert dict(device_dict[dev])
+
 from .handler import *
