@@ -8,7 +8,7 @@
 
 # nonebot-plugin-lockinglock
 
-_✨ (LockingLock)[] 查看插件 ✨_
+_✨ [LockingLock 查看插件](https://github.com/i2cy/Nonebot-Plugin-LockingLock) ✨_
 
 </div>
 
