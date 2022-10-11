@@ -6,15 +6,29 @@
 # Created on: 1/10/2022
 
 from nonebot import get_driver
-
+from i2llservice.client import I2LLClient
 from .config import Config
 
-GLOBAL_CONFIG = get_driver().config
+DRIVER = get_driver()
+GLOBAL_CONFIG = DRIVER.config
 LL_CONFIG = Config.parse_obj(GLOBAL_CONFIG)
 
-# validate config
-device_dict = LL_CONFIG.i2ll_devices
-for dev in device_dict.keys():
-    assert dict(device_dict[dev])
+LL_CLT = I2LLClient(LL_CONFIG.i2ll_host, LL_CONFIG.i2ll_port, LL_CONFIG.i2ll_psk,
+                    watchdog_timeout=LL_CONFIG.i2ll_timeout,
+                    max_buffer_size=LL_CONFIG.i2ll_clt_buffer)
+
+
+def i2ll_init():
+    global LL_CLT
+    LL_CLT.connect(15)
+
+
+def i2ll_stop():
+    global LL_CLT
+    LL_CLT.reset()
+
+
+DRIVER.on_startup(i2ll_init)
+DRIVER.on_shutdown(i2ll_stop)
 
 from .handler import *

@@ -31,7 +31,7 @@ setuptools.setup(
     ],
     install_requires=[
         'i2cylib>=1.12.1',
-        'i2llserver>=1.0.0',
+        'i2llserver>=1.1.0',
         'nonebot2',
         'nonebot-adapter-mirai2'
     ],
