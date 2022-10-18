@@ -34,13 +34,3 @@ class Config(BaseSettings, extra=Extra.ignore):
     i2ll_timeout: int = 15
     i2ll_devices: List[Devices] = []
 
-    @validator("i2ll_port")
-    def password_rule(cls, i2ll_port):
-        def is_valid(port):
-            if port < 0 or port >= 256 * 256:
-                return False
-            else:
-                return True
-
-        if not is_valid(i2ll_port):
-            raise ValueError("server port is invalid")
