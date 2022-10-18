@@ -14,6 +14,7 @@ config.i2ll_devices
 
 from pydantic import BaseSettings, BaseModel, Extra, validator
 from typing import List
+from i2llservice.client import DeviceClient
 
 
 class Devices(BaseModel, extra=Extra.ignore):
@@ -21,6 +22,7 @@ class Devices(BaseModel, extra=Extra.ignore):
     alias: List[str] = []
     root_topic: str
     permitted_group: List[int]
+    dev_clt: DeviceClient = None
 
 
 class Config(BaseSettings, extra=Extra.ignore):

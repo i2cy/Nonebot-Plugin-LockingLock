@@ -1,0 +1,4 @@
+i2llserver >= 1.1.0
+nb-cli
+setuptools
+pydantic

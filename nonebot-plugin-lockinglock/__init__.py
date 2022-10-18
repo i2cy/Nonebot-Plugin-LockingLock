@@ -21,6 +21,7 @@ LL_CLT = I2LLClient(LL_CONFIG.i2ll_host, LL_CONFIG.i2ll_port, LL_CONFIG.i2ll_psk
 def i2ll_init():
     global LL_CLT
     LL_CLT.connect(15)
+    len(LL_CLT)
 
 
 def i2ll_stop():

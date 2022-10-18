@@ -21,3 +21,23 @@ _✨ [LockingLock 查看插件](https://github.com/i2cy/Nonebot-Plugin-LockingLo
   </a>
   <img src="https://img.shields.io/badge/python-3.7+-blue.svg" alt="python">
 </p>
+
+## 配置项
+
+配置方式：直接在 NoneBot 全局配置文件中添加以下配置项即可。
+
+### 默认配置模板
+    i2ll_host="127.0.0.1"
+    i2ll_port=8421
+    i2ll_psk="i2tcppsk"
+    i2ll_clt_buffer=20
+    i2ll_timeout=15
+    i2ll_devices:“
+    [
+        {
+            alias: ["test_device"],
+            root_topic: "esp32test/test_device",
+            permitted_group: [123456788]
+        }
+    ]
+    ”
