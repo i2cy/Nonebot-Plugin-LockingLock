@@ -5,6 +5,8 @@
     <orderEntry type="jdk" jdkName="Remote Python 3.9.13 (I2APP) (CodyBot)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ESP32S3LockingLock" />
+    <orderEntry type="module" module-name="I2cylib" />
+    <orderEntry type="module" module-name="CodyBot2" />
   </component>
   <component name="PackageRequirementsSettings">
     <option name="versionSpecifier" value="不指定版本" />
