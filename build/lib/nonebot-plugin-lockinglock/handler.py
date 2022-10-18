@@ -39,7 +39,6 @@ NLP_PROC = NlpUnit()
 
 CALLING_TS = 0
 CALLING_RESPOND_FLAG = False
-CONCENTRATE_USER_ID = 0
 
 NOTE_UNLOCK_BY_CMD_TS = 0
 NOTE_UNLOCK_BY_PWD_TS = 0
@@ -58,9 +57,8 @@ async def unlock_by_group_member(bot: Bot, event: GroupMessage):
     if NLP_PROC.is_calling(msg):
         CALLING_RESPOND_FLAG = False
         CALLING_TS = time.time()
-        CONCENTRATE_USER_ID = event.sender.id
 
-    if time.time() - CALLING_TS < CALLING_COOLDOWN and group_id in GROUP_INDEX_TREE.keys():
+    if CALLING_TS and group_id in GROUP_INDEX_TREE.keys():
 
         # 解锁
         if NLP_PROC.is_unlock(msg):
@@ -116,6 +114,7 @@ async def unlock_by_group_member(bot: Bot, event: GroupMessage):
             if dev_clt.isOnline():
                 dev_clt.unlock()
                 if time.time() - NOTE_UNLOCK_BY_CMD_TS > NOTE_COOLDOWN:
+                    NOTE_UNLOCK_BY_CMD_TS = time.time()
                     await matcher.send(MessageSegment.plain(
                         "已提交开门申请，请前往目标设备所控制的门，自然敲击3次以上确认开锁"
                     ))
@@ -132,13 +131,13 @@ async def unlock_by_group_member(bot: Bot, event: GroupMessage):
                     await matcher.send(MessageSegment.plain(
                         "已提交开门申请"
                     ))
-                NOTE_UNLOCK_BY_CMD_TS = time.time()
 
             else:
                 code = dev_clt.unlock()
                 code = dyn16ToDec(code, 4)
 
                 if time.time() - NOTE_UNLOCK_BY_PWD_TS > NOTE_COOLDOWN:
+                    NOTE_UNLOCK_BY_PWD_TS = time.time()
                     await matcher.send(MessageSegment.plain(
                         "门锁设备当前不在线，若设备通电，可通过敲击出以下密码序列开门：\n{}".format(
                             ", ".join(code)
@@ -156,9 +155,7 @@ async def unlock_by_group_member(bot: Bot, event: GroupMessage):
                             ", ".join(code)
                         )
                     ))
-                NOTE_UNLOCK_BY_PWD_TS = time.time()
-
-            CALLING_TS = 0
+                CALLING_TS = 0
 
         # 默认响应
         else:
