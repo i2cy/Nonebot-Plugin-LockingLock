@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../CodyBot2/.idea/CodyBot2.iml" filepath="$PROJECT_DIR$/../CodyBot2/.idea/CodyBot2.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ESP32S3LockingLock/.idea/ESP32S3LockingLock.iml" filepath="$PROJECT_DIR$/../ESP32S3LockingLock/.idea/ESP32S3LockingLock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../I2cylib/.idea/I2cylib.iml" filepath="$PROJECT_DIR$/../I2cylib/.idea/I2cylib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/NonebotPluginLockingLock.iml" filepath="$PROJECT_DIR$/.idea/NonebotPluginLockingLock.iml" />
     </modules>
   </component>
