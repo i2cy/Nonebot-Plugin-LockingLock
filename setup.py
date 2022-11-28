@@ -12,7 +12,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="nonebot-plugin-lockinglock",  # Replace with your own username
-    version="0.1.0",
+    version="0.1.3",
     author="I2cy Cloud",
     author_email="i2cy@outlook.com",
     description="Locking Lock remote controller plugin based on Nonebot standard",

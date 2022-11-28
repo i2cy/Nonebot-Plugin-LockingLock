@@ -14,7 +14,7 @@ from i2llservice.utils import dyn16ToDec
 import time
 import random
 
-NOTE_COOLDOWN = 120
+NOTE_COOLDOWN = 3600 * 24
 CALLING_COOLDOWN = 20
 
 matcher = on_message()
@@ -58,7 +58,6 @@ async def unlock_by_group_member(bot: Bot, event: GroupMessage):
     if NLP_PROC.is_calling(msg):
         CALLING_RESPOND_FLAG = False
         CALLING_TS = time.time()
-        CONCENTRATE_USER_ID = event.sender.id
 
     if time.time() - CALLING_TS < CALLING_COOLDOWN and group_id in GROUP_INDEX_TREE.keys():
 
@@ -136,26 +135,28 @@ async def unlock_by_group_member(bot: Bot, event: GroupMessage):
 
             else:
                 code = dev_clt.unlock()
-                code = dyn16ToDec(code, 4)
+                if code:
+                    code = dyn16ToDec(code, 4)
+                else:
+                    await matcher.send(MessageSegment.plain(
+                        "门锁设备当前不在线，且与服务器的连接出现了问题"
+                        )
+                    )
+
+                await matcher.send(MessageSegment.plain(
+                    "门锁设备当前不在线，若设备通电，可通过敲击出以下密码序列开门：\n{}".format(
+                        ", ".join([str(i) for i in code])
+                    )
+                ))
 
                 if time.time() - NOTE_UNLOCK_BY_PWD_TS > NOTE_COOLDOWN:
-                    await matcher.send(MessageSegment.plain(
-                        "门锁设备当前不在线，若设备通电，可通过敲击出以下密码序列开门：\n{}".format(
-                            ", ".join(code)
-                        )
-                    ))
                     await matcher.send(MessageSegment.plain(
                         "密码序列有效时间两分钟，当敲击序列正确识别后，电机会发出微弱提示声，此时代表正在开门"
                     ))
                     await matcher.send(MessageSegment.plain(
                         "门锁电机拉力略微弱，若锁舌被卡住，可能需要抵（或拉）门以防止锁舌被卡导致电机无法拖动"
                     ))
-                else:
-                    await matcher.send(MessageSegment.plain(
-                        "门锁设备当前不在线，若设备通电，可通过敲击出以下密码序列开门：\n{}".format(
-                            ", ".join(code)
-                        )
-                    ))
+
                 NOTE_UNLOCK_BY_PWD_TS = time.time()
 
             CALLING_TS = 0

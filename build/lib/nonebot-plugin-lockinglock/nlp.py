@@ -15,7 +15,7 @@ class NlpUnit:
         ret = False
 
         for i in kws:
-            if i in msg:
+            if i in msg and len(msg) < 4 * len(i):
                 ret = True
                 break
 
