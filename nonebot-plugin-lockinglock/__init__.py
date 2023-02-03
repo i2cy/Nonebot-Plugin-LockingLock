@@ -11,7 +11,7 @@ from .config import Config
 from i2cylib.utils.logger import Logger
 
 DRIVER = get_driver()
-GLOBAL_CONFIG = DRIVER.config
+GLOBAL_CONFIG = DRIVER.CODY_CONFIG
 LL_CONFIG = Config.parse_obj(GLOBAL_CONFIG)
 
 if LL_CONFIG.i2ll_debug:
