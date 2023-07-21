@@ -4,7 +4,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ESP32S3LockingLock" />
-    <orderEntry type="module" module-name="I2cylib" />
     <orderEntry type="module" module-name="CodyBot2" />
   </component>
   <component name="PackageRequirementsSettings">
